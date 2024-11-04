@@ -39,9 +39,76 @@ namespace Mastermind
             colorCode.Clear();
             for (int i = 0; i < 4; i++)
             {
-                random.Next(0, colors.Count);
-                colorCode.Add(colors.ElementAt(i).Key, colors.ElementAt(i).Value);
+                int index = random.Next(0, colors.Count);
+                colorCode.Add(colors.ElementAt(index).Key, colors.ElementAt(index).Value);
             }
+        }
+
+        public static List<int> ValidateColorCode(string color1, string color2, string color3, string color4)
+        {
+            List<int> points = new List<int>();
+
+            if (color1.Equals(ColorCode.ElementAt(0).Value))
+            {
+                points.Add(2);
+            }
+            else if (ColorCode.ContainsValue(color1))
+            {
+                points.Add(1);
+            }
+            else
+            {
+                points.Add(0);
+            }
+
+            if (color2.Equals(ColorCode.ElementAt(1).Value))
+            {
+                points.Add(2);
+            }
+            else if (ColorCode.ContainsValue(color2))
+            {
+                points.Add(1);
+            }
+            else
+            {
+                points.Add(0);
+            }
+
+            if (color3.Equals(ColorCode.ElementAt(2).Value))
+            {
+                points.Add(2);
+            }
+            else if (ColorCode.ContainsValue(color3))
+            {
+                points.Add(1);
+            }
+            else
+            {
+                points.Add(0);
+            }
+
+            if (color4.Equals(ColorCode.ElementAt(3).Value))
+            {
+                points.Add(2);
+            }
+            else if (ColorCode.ContainsValue(color4))
+            {
+                points.Add(1);
+            }
+            else
+            {
+                points.Add(0);
+            }
+
+            ResetBooleans();
+            return points;
+        }
+        private static void ResetBooleans()
+        {
+            Color1LabelAdded = false;
+            Color2LabelAdded = false;
+            Color3LabelAdded = false;
+            Color4LabelAdded = false;
         }
     }
 }

@@ -26,12 +26,6 @@ namespace Mastermind
             ChangeTitle();
             FillComboBoxes();
         }
-
-        private void BtnValidateCode_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void ChangeTitle()
         {
             Data.GenerateRandomColorCode();
@@ -57,26 +51,28 @@ namespace Mastermind
         private void CboColor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox cbo = sender as ComboBox;
-
-            if (cbo.Name.Equals("CboColor1"))
+            if(cbo.SelectedIndex != -1)
             {
-                AddOrChangeLabel(StackColor1, cbo, Data.Color1LabelAdded);
-                Data.Color1LabelAdded = true;
-            }
-            else if (cbo.Name.Equals("CboColor2"))
-            {
-                AddOrChangeLabel(StackColor2, cbo, Data.Color2LabelAdded);
-                Data.Color2LabelAdded = true;
-            }
-            else if (cbo.Name.Equals("CboColor3"))
-            {
-                AddOrChangeLabel(StackColor3, cbo, Data.Color3LabelAdded);
-                Data.Color3LabelAdded = true;
-            }
-            else if (cbo.Name.Equals("CboColor4"))
-            {
-                AddOrChangeLabel(StackColor4, cbo, Data.Color4LabelAdded);
-                Data.Color4LabelAdded = true;
+                if (cbo.Name.Equals("CboColor1"))
+                {
+                    AddOrChangeLabel(StackColor1, cbo, Data.Color1LabelAdded);
+                    Data.Color1LabelAdded = true;
+                }
+                else if (cbo.Name.Equals("CboColor2"))
+                {
+                    AddOrChangeLabel(StackColor2, cbo, Data.Color2LabelAdded);
+                    Data.Color2LabelAdded = true;
+                }
+                else if (cbo.Name.Equals("CboColor3"))
+                {
+                    AddOrChangeLabel(StackColor3, cbo, Data.Color3LabelAdded);
+                    Data.Color3LabelAdded = true;
+                }
+                else if (cbo.Name.Equals("CboColor4"))
+                {
+                    AddOrChangeLabel(StackColor4, cbo, Data.Color4LabelAdded);
+                    Data.Color4LabelAdded = true;
+                }
             }
         }
         private void AddOrChangeLabel(StackPanel stackPanel,ComboBox comboBox, bool labelAdded)
@@ -103,6 +99,40 @@ namespace Mastermind
             SolidColorBrush brush = Data.Colors.Where(x => x.Value.Equals(comboBox.SelectedValue))
                                    .Select(x => x.Key).First();
             return brush;
+        }
+        private void BtnValidateCode_Click(object sender, RoutedEventArgs e)
+        {
+            List<int> points = Data.ValidateColorCode(CboColor1.SelectedValue.ToString(), CboColor2.SelectedValue.ToString(), CboColor3.SelectedValue.ToString(), CboColor4.SelectedValue.ToString());
+            List<StackPanel> stackPanels = new List<StackPanel>() { StackColor1, StackColor2, StackColor3, StackColor4 };
+            for (int i = 0; i < stackPanels.Count; i++)
+            {
+                ChangeBorder(stackPanels[i], points[i]);
+            }
+            ClearComboBoxSelection();
+        }
+
+        private void ChangeBorder(StackPanel stackPanel, int points)
+        {
+            if (points == 2)
+            {
+                Label label = stackPanel.Children[stackPanel.Children.Count - 1] as Label;
+                label.BorderBrush = Brushes.DarkRed;
+                label.BorderThickness = new Thickness(3);
+            }
+            else if (points == 1)
+            {
+                Label label = stackPanel.Children[stackPanel.Children.Count - 1] as Label;
+                label.BorderBrush = Brushes.Wheat;
+                label.BorderThickness = new Thickness(3);
+            }
+        }
+
+        private void ClearComboBoxSelection()
+        {
+            CboColor1.SelectedIndex = -1;
+            CboColor2.SelectedIndex = -1;
+            CboColor3.SelectedIndex = -1;
+            CboColor4.SelectedIndex = -1;
         }
     }
 }
