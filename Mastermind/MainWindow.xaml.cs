@@ -53,5 +53,56 @@ namespace Mastermind
                 CboColor4.Items.Add(color.Value);
             }
         }
+
+        private void CboColor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cbo = sender as ComboBox;
+
+            if (cbo.Name.Equals("CboColor1"))
+            {
+                AddOrChangeLabel(StackColor1, cbo, Data.Color1LabelAdded);
+                Data.Color1LabelAdded = true;
+            }
+            else if (cbo.Name.Equals("CboColor2"))
+            {
+                AddOrChangeLabel(StackColor2, cbo, Data.Color2LabelAdded);
+                Data.Color2LabelAdded = true;
+            }
+            else if (cbo.Name.Equals("CboColor3"))
+            {
+                AddOrChangeLabel(StackColor3, cbo, Data.Color3LabelAdded);
+                Data.Color3LabelAdded = true;
+            }
+            else if (cbo.Name.Equals("CboColor4"))
+            {
+                AddOrChangeLabel(StackColor4, cbo, Data.Color4LabelAdded);
+                Data.Color4LabelAdded = true;
+            }
+        }
+        private void AddOrChangeLabel(StackPanel stackPanel,ComboBox comboBox, bool labelAdded)
+        {
+            if (!labelAdded)
+            {
+                Label label = new Label();
+                label.Height = 35;
+                label.Width = 35;
+
+                label.Background = GetColorBrush(comboBox);
+
+                stackPanel.Children.Add(label);
+            }
+            else
+            {
+                Label label = (Label)stackPanel.Children[stackPanel.Children.Count - 1];
+                label.Background = GetColorBrush(comboBox);
+            }
+
+        }
+        private SolidColorBrush GetColorBrush(ComboBox comboBox)
+        {
+            SolidColorBrush brush = Data.Colors.Where(x => x.Value.Equals(comboBox.SelectedValue))
+                                   .Select(x => x.Key).First();
+            return brush;
+        }
     }
 }

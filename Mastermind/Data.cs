@@ -20,6 +20,10 @@ namespace Mastermind
         {
             get {  return colorCode; }
         }
+        public static bool Color1LabelAdded { get; set; }
+        public static bool Color2LabelAdded { get; set; }
+        public static bool Color3LabelAdded { get; set; }
+        public static bool Color4LabelAdded { get; set; }
 
         static Data()
         {
