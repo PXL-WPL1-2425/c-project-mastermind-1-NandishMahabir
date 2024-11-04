@@ -24,6 +24,7 @@ namespace Mastermind
         {
             InitializeComponent();
             ChangeTitle();
+            FillComboBoxes();
         }
 
         private void BtnValidateCode_Click(object sender, RoutedEventArgs e)
@@ -40,6 +41,17 @@ namespace Mastermind
                 stringBuilder.Append($"{color.Value} ");
             }
             this.Title = stringBuilder.ToString();
+        }
+
+        private void FillComboBoxes()
+        {
+            foreach(var color in Data.Colors)
+            {
+                CboColor1.Items.Add(color.Value);
+                CboColor2.Items.Add(color.Value);
+                CboColor3.Items.Add(color.Value);
+                CboColor4.Items.Add(color.Value);
+            }
         }
     }
 }

@@ -9,8 +9,12 @@ namespace Mastermind
 {
     public static class Data
     {
-        static Dictionary<SolidColorBrush, string> colors = new Dictionary<SolidColorBrush, string>();
         private static Random random = new Random();
+        static Dictionary<SolidColorBrush, string> colors = new Dictionary<SolidColorBrush, string>();
+        public static Dictionary<SolidColorBrush, string> Colors
+        {
+            get { return colors; }
+        }
         private static Dictionary<SolidColorBrush, string> colorCode = new Dictionary<SolidColorBrush, string>();
         public static Dictionary<SolidColorBrush, string> ColorCode
         {

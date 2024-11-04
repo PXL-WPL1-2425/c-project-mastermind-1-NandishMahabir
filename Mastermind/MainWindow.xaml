@@ -19,10 +19,10 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ComboBox Name="Color1" FontSize="18" Margin="5 25"/>
-        <ComboBox Name="Color2" FontSize="18" Margin="5 25" Grid.Row="1"/>
-        <ComboBox Name="Color3" FontSize="18" Margin="5 25" Grid.Row="2"/>
-        <ComboBox Name="Color4" FontSize="18" Margin="5 25" Grid.Row="3"/>
+        <ComboBox Name="CboColor1" FontSize="18" Margin="5 25"/>
+        <ComboBox Name="CboColor2" FontSize="18" Margin="5 25" Grid.Row="1"/>
+        <ComboBox Name="CboColor3" FontSize="18" Margin="5 25" Grid.Row="2"/>
+        <ComboBox Name="CboColor4" FontSize="18" Margin="5 25" Grid.Row="3"/>
         <Button Name="BtnValidateCode" Content="Check Code" FontSize="20" Grid.Column="1" Grid.Row="4" Margin="75 25" Click="BtnValidateCode_Click" />
     </Grid>
 </Window>
