@@ -23,11 +23,23 @@ namespace Mastermind
         public MainWindow()
         {
             InitializeComponent();
+            ChangeTitle();
         }
 
         private void BtnValidateCode_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ChangeTitle()
+        {
+            Data.GenerateRandomColorCode();
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach(var color in Data.ColorCode)
+            {
+                stringBuilder.Append($"{color.Value} ");
+            }
+            this.Title = stringBuilder.ToString();
         }
     }
 }
