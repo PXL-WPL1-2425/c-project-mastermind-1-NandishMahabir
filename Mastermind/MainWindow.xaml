@@ -22,7 +22,7 @@
         <ComboBox Name="CboColor1" FontSize="18" Margin="5 25" SelectionChanged="CboColor_SelectionChanged"/>
         <StackPanel Name="StackColor1" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="5 20"/>
         <ComboBox Name="CboColor2" FontSize="18" Margin="5 25" Grid.Row="1" SelectionChanged="CboColor_SelectionChanged"/>
-        <StackPanel Name="StackColor2" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Orientation="Horizontal" Margin="5 20"/>
+        <StackPanel Name="StackColor2" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Orientation="Horizontal" Margin="5 20" />
         <ComboBox Name="CboColor3" FontSize="18" Margin="5 25" Grid.Row="2" SelectionChanged="CboColor_SelectionChanged"/>
         <StackPanel Name="StackColor3" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Orientation="Horizontal" Margin="5 20"/>
         <ComboBox Name="CboColor4" FontSize="18" Margin="5 25" Grid.Row="3" SelectionChanged="CboColor_SelectionChanged"/>

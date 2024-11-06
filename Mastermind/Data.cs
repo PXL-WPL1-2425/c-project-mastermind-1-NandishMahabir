@@ -15,8 +15,8 @@ namespace Mastermind
         {
             get { return colors; }
         }
-        private static Dictionary<SolidColorBrush, string> colorCode = new Dictionary<SolidColorBrush, string>();
-        public static Dictionary<SolidColorBrush, string> ColorCode
+        private static List<string> colorCode = new List<string>();
+        public static List<string> ColorCode
         {
             get {  return colorCode; }
         }
@@ -24,7 +24,6 @@ namespace Mastermind
         public static bool Color2LabelAdded { get; set; }
         public static bool Color3LabelAdded { get; set; }
         public static bool Color4LabelAdded { get; set; }
-
         static Data()
         {
             colors.Add(Brushes.Red, "Red");
@@ -40,66 +39,27 @@ namespace Mastermind
             for (int i = 0; i < 4; i++)
             {
                 int index = random.Next(0, colors.Count);
-                colorCode.Add(colors.ElementAt(index).Key, colors.ElementAt(index).Value);
+                colorCode.Add(colors.ElementAt(index).Value);
             }
         }
-
-        public static List<int> ValidateColorCode(string color1, string color2, string color3, string color4)
+        public static List<int> ValidateColorCode(List<string> inputColors)
         {
             List<int> points = new List<int>();
-
-            if (color1.Equals(ColorCode.ElementAt(0).Value))
+            for(int i = 0; i < inputColors.Count; i++)
             {
-                points.Add(2);
+                if (inputColors[i].Equals(ColorCode[i]))
+                {
+                    points.Add(2);
+                }
+                else if (ColorCode.Contains(inputColors[i]))
+                {
+                    points.Add(1);
+                }
+                else
+                {
+                    points.Add(0);
+                }
             }
-            else if (ColorCode.ContainsValue(color1))
-            {
-                points.Add(1);
-            }
-            else
-            {
-                points.Add(0);
-            }
-
-            if (color2.Equals(ColorCode.ElementAt(1).Value))
-            {
-                points.Add(2);
-            }
-            else if (ColorCode.ContainsValue(color2))
-            {
-                points.Add(1);
-            }
-            else
-            {
-                points.Add(0);
-            }
-
-            if (color3.Equals(ColorCode.ElementAt(2).Value))
-            {
-                points.Add(2);
-            }
-            else if (ColorCode.ContainsValue(color3))
-            {
-                points.Add(1);
-            }
-            else
-            {
-                points.Add(0);
-            }
-
-            if (color4.Equals(ColorCode.ElementAt(3).Value))
-            {
-                points.Add(2);
-            }
-            else if (ColorCode.ContainsValue(color4))
-            {
-                points.Add(1);
-            }
-            else
-            {
-                points.Add(0);
-            }
-
             ResetBooleans();
             return points;
         }

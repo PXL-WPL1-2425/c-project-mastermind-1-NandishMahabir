@@ -32,11 +32,10 @@ namespace Mastermind
             StringBuilder stringBuilder = new StringBuilder();
             foreach(var color in Data.ColorCode)
             {
-                stringBuilder.Append($"{color.Value} ");
+                stringBuilder.Append($"{color} ");
             }
             this.Title = stringBuilder.ToString();
         }
-
         private void FillComboBoxes()
         {
             foreach(var color in Data.Colors)
@@ -47,7 +46,6 @@ namespace Mastermind
                 CboColor4.Items.Add(color.Value);
             }
         }
-
         private void CboColor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox cbo = sender as ComboBox;
@@ -102,15 +100,21 @@ namespace Mastermind
         }
         private void BtnValidateCode_Click(object sender, RoutedEventArgs e)
         {
-            List<int> points = Data.ValidateColorCode(CboColor1.SelectedValue.ToString(), CboColor2.SelectedValue.ToString(), CboColor3.SelectedValue.ToString(), CboColor4.SelectedValue.ToString());
-            List<StackPanel> stackPanels = new List<StackPanel>() { StackColor1, StackColor2, StackColor3, StackColor4 };
-            for (int i = 0; i < stackPanels.Count; i++)
+            if(CboColor1.SelectedIndex != -1 && CboColor2.SelectedIndex != -1 && CboColor3.SelectedIndex != -1 && CboColor4.SelectedIndex != -1)
             {
-                ChangeBorder(stackPanels[i], points[i]);
+                List<int> points = Data.ValidateColorCode(new List<string> { CboColor1.SelectedValue.ToString(), CboColor2.SelectedValue.ToString(), CboColor3.SelectedValue.ToString(), CboColor4.SelectedValue.ToString() });
+                List<StackPanel> stackPanels = new List<StackPanel>() { StackColor1, StackColor2, StackColor3, StackColor4 };
+                for (int i = 0; i < stackPanels.Count; i++)
+                {
+                    ChangeBorder(stackPanels[i], points[i]);
+                }
+                ClearComboBoxSelection();
             }
-            ClearComboBoxSelection();
+            else
+            {
+                MessageBox.Show("Make sure to select a color at all positions.", "Error");
+            }
         }
-
         private void ChangeBorder(StackPanel stackPanel, int points)
         {
             if (points == 2)
@@ -126,7 +130,6 @@ namespace Mastermind
                 label.BorderThickness = new Thickness(3);
             }
         }
-
         private void ClearComboBoxSelection()
         {
             CboColor1.SelectedIndex = -1;
